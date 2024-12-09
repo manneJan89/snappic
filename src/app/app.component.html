@@ -1,0 +1,33 @@
+<div class="container">
+
+    <aside>
+
+        <div class="action">
+
+            <div class="cards">
+                <app-card *ngFor="let stream of streamData" [heading]="stream.heading" [value]="stream.value"></app-card>
+            </div>
+
+            <app-button [fullWidth]="true" (click)="addingStream = true">+ Add New Session</app-button>    
+        </div>
+
+    </aside>
+
+    <div class="content-body">
+        <header>
+
+            <div class="calendar">
+                <img src="../assets/images/calendar.png" alt="calendar" width="16px">
+                {{ currentDate | date: 'MMM yyyy' }}
+            </div>
+        
+            <div class="date">{{ currentDate | date: 'dd MMMM' }}</div>
+        
+        </header>
+        
+        <app-timeline></app-timeline>
+    </div>
+
+</div>
+
+<app-upsert-stream [show]="addingStream" (closeModal)="addingStream = false"></app-upsert-stream>

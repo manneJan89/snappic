@@ -1,0 +1,24 @@
+<div class="timeline">
+
+    <div class="time-indicator" [style.left.%]="currentTimePosition">
+        <div class="time-label">{{ currentDate | date: 'HH:mm' }}</div>
+    </div>
+    
+    <div class="timeline-container">
+
+        <div class="background">
+            <span *ngFor="let heading of headings" class="heading-{{ heading }}">
+                {{ heading < 10 ? '0' : '' }}{{ heading }}:00
+            </span>
+        </div>
+
+        <ng-container *ngFor="let session of streamingSessions; index as i">
+          <ng-container *ngFor="let segment of getSegmentStyles(session, i)">
+            <div class="timeline-item" [ngStyle]="segment" [style.--height-of-timeline-item]="heightOfTimelineItem + 'px'">
+              <span class="timeline-title">{{ session.title }}</span>
+            </div>
+          </ng-container>
+        </ng-container>
+    </div>
+
+</div>

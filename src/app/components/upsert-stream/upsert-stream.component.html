@@ -1,0 +1,74 @@
+<div class="modal" *ngIf="show" @fade>
+
+    <div class="body">
+
+        <div class="header">
+            <div class="close" (click)="closeModal.emit()">
+                <img src="../../../assets/images/close.png" alt="Close" width="20px">
+            </div>
+        </div>
+
+        <div class="content">
+
+            <div class="heading">
+                Add a new Streaming Session
+            </div>
+
+            <form [formGroup]="upsertStreamFormGroup">
+
+                <div class="title">
+                    <label>Title</label>
+                    <div class="form-controls">
+                        <input type="text" formControlName="title" [class.error]="upsertStreamFormGroup.get('title')?.invalid && this.formSubmitted">
+                    </div>
+
+                    <div class="error" *ngIf="upsertStreamFormGroup.get('title')?.invalid && this.formSubmitted">
+                        <span>Please enter a title</span>
+                    </div>
+                </div>
+
+                <div class="start-time">
+                    <label>Start Time</label>
+                    <div class="form-controls">
+                        <input type="date" formControlName="startDate" [class.error]="upsertStreamFormGroup.get('startDate')?.invalid && this.formSubmitted">
+                        <input type="time" formControlName="startTime" [class.error]="upsertStreamFormGroup.get('startTime')?.invalid && this.formSubmitted">
+                    </div>
+
+                    <div class="error" *ngIf="upsertStreamFormGroup.invalid && this.formSubmitted">
+                        <span *ngIf="upsertStreamFormGroup.get('startDate')?.invalid">Please enter a valid start date</span>
+                        <span *ngIf="upsertStreamFormGroup.get('startTime')?.invalid">Please enter a valid start time</span>
+                    </div>
+                    
+                </div>
+
+                <div class="end-time">
+                    <label>End Time</label>
+                    <div class="form-controls">
+                        <input type="date" formControlName="endDate" [class.error]="upsertStreamFormGroup.get('endDate')?.invalid && this.formSubmitted">
+                        <input type="time" formControlName="endTime" [class.error]="upsertStreamFormGroup.get('endTime')?.invalid && this.formSubmitted">
+                    </div>
+
+                    <div class="error" *ngIf="upsertStreamFormGroup.invalid && this.formSubmitted">
+                        <span *ngIf="upsertStreamFormGroup.get('endDate')?.invalid">Please enter a valid end date</span>
+                        <span *ngIf="upsertStreamFormGroup.get('endTime')?.invalid">Please enter a valid end time</span>
+                    </div>
+                </div>
+
+                <div class="error">
+                    <div *ngIf="upsertStreamFormGroup.hasError('pastDateTime') && upsertStreamFormGroup.touched">
+                        <span>The selected date and time cannot be in the past</span>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="footer">
+            <app-button appearance="OUTLINE" color="SECONDARY" (click)="closeModal.emit()">Close</app-button>
+            <app-button color="PRIMARY" (click)="saveStream()" [disabled]="loading || upsertStreamFormGroup.invalid">Save</app-button>
+        </div>
+
+    </div>
+
+</div>

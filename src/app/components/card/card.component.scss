@@ -1,0 +1,17 @@
+.card {
+    padding: 10px 20px;
+    border-radius: 7px;
+    background-color: whitesmoke;
+
+    display: flex;
+    justify-content: space-between;
+
+    .heading {
+        font-size: 14px;
+    }
+
+    .value {
+        font-weight: 600;
+    }
+
+}
